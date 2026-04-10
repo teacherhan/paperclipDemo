@@ -2,6 +2,16 @@
 
 This checklist is written for a board operator using Paperclip UI/API.
 
+## Optional one-command automation
+
+If you prefer to provision everything automatically (company + goals + agents + projects + starter issues), run:
+
+```bash
+./implementation-plan/scripts/bootstrap-signalforge.sh
+```
+
+See `AUTOMATION.md` for token-based authenticated mode and dry-run usage.
+
 ## 0) Prerequisites
 
 - Install dependencies and start Paperclip:
@@ -118,4 +128,3 @@ Each Friday:
 - Routines enabled
 - At least one successful run from every active agent
 - Weekly memo process in place
-

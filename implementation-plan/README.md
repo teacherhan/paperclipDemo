@@ -18,6 +18,7 @@ This folder contains a complete, copy-ready blueprint to set up an AI SaaS compa
 - `IMPLEMENTATION-STEPS.md` — exact setup sequence in Paperclip UI
 - `COMPANY-BLUEPRINT.md` — high-level company shape, goals, KPIs
 - `ISSUES-BACKLOG.csv` — import-friendly issue starter backlog
+- `AUTOMATION.md` — one-command automation and API bootstrap guidance
 - `ops/BUDGETS.md` — monthly budget + control policy
 - `ops/APPROVALS-POLICY.md` — governance and approval gates
 - `ops/ROUTINES.md` — recurring schedule for CEO/teams
@@ -34,3 +35,12 @@ This folder contains a complete, copy-ready blueprint to set up an AI SaaS compa
 5. Apply budget + approvals from `ops/` docs.
 6. Start heartbeats using `ops/ROUTINES.md`.
 
+## Fully automated option
+
+If you want one-command setup, use:
+
+```bash
+./implementation-plan/scripts/bootstrap-signalforge.sh
+```
+
+See `AUTOMATION.md` for authenticated mode, dry-run mode, and adapter options.
