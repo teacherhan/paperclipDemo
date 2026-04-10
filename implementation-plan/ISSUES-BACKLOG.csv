@@ -1,0 +1,26 @@
+id,title,owner,priority,goal,project,parent_id,status
+1,"Define MVP scope v1 (must/should/won't)",cto_01,high,G1.1,MVP Build,P1,backlog
+2,"Create ADR-001 architecture decisions",cto_01,medium,G1.1,MVP Build,P1,backlog
+3,"Implement user auth and session flow",eng_be_01,critical,G1.1,MVP Build,P1,backlog
+4,"Create onboarding wizard (time-to-value <5 min)",eng_fe_01,critical,G1.1,MVP Build,P1,backlog
+5,"Build transcript/summary core pipeline",eng_be_01,critical,G1.1,MVP Build,P1,backlog
+6,"Implement summary viewer with share/export",eng_fe_01,high,G1.1,MVP Build,P1,backlog
+7,"Integrate checkout, trial, and billing",eng_be_01,critical,G1.1,MVP Build,P1,backlog
+8,"Implement pricing page and plan selector",eng_fe_01,high,G1.1,MVP Build,P1,backlog
+9,"Add usage metering events",eng_be_01,high,G1.1,MVP Build,P1,backlog
+10,"Create reliability dashboard baseline",qa_rel_01,high,G1.1,MVP Build,P1,backlog
+11,"Define release checklist and rollback runbook",qa_rel_01,high,G1.1,MVP Build,P1,backlog
+12,"Ship private beta RC1",cto_01,critical,G1.1,MVP Build,P1,backlog
+13,"Define ICP and value proposition matrix",cmo_01,critical,G1.2,Growth Engine,P2,backlog
+14,"Write homepage copy variants",growth_01,high,G1.2,Growth Engine,P2,backlog
+15,"Publish landing page plus analytics",growth_01,critical,G1.2,Growth Engine,P2,backlog
+16,"Set up 5-step outbound email sequence",growth_01,high,G1.2,Growth Engine,P2,backlog
+17,"Launch paid experiment #1",growth_01,high,G1.2,Growth Engine,P2,backlog
+18,"Launch paid experiment #2",growth_01,high,G1.2,Growth Engine,P2,backlog
+19,"Build weekly acquisition dashboard",cmo_01,high,G1.2,Growth Engine,P2,backlog
+20,"Create referral loop experiment",cmo_01,medium,G1.2,Growth Engine,P2,backlog
+21,"Design support triage taxonomy",support_01,high,G1.3,Customer Success,P3,backlog
+22,"Publish FAQ and getting-started docs",support_01,high,G1.3,Customer Success,P3,backlog
+23,"Create onboarding lifecycle email series",growth_01,medium,G1.3,Customer Success,P3,backlog
+24,"Define churn-reason capture loop",support_01,medium,G1.3,Customer Success,P3,backlog
+25,"CEO weekly board memo and risk report",ceo_01,high,G1,Customer Success,P4,backlog
