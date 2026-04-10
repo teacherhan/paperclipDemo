@@ -19,6 +19,7 @@ This folder contains a complete, copy-ready blueprint to set up an AI SaaS compa
 - `COMPANY-BLUEPRINT.md` — high-level company shape, goals, KPIs
 - `ISSUES-BACKLOG.csv` — import-friendly issue starter backlog
 - `AUTOMATION.md` — one-command automation and API bootstrap guidance
+- `HOSTINGER-VPS-RUNBOOK.md` — remote VPS execution guide
 - `ops/BUDGETS.md` — monthly budget + control policy
 - `ops/APPROVALS-POLICY.md` — governance and approval gates
 - `ops/ROUTINES.md` — recurring schedule for CEO/teams

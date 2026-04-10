@@ -38,7 +38,9 @@ PAPERCLIP_TOKEN="<bearer-token>" \
 
 - `PAPERCLIP_BASE_URL` (default: `http://localhost:3100/api`)
 - `PAPERCLIP_ADAPTER_TYPE` (default: `codex_local`)
+- `PAPERCLIP_COOKIE="<cookie_name>=<cookie_value>"` for session-cookie auth
 - `PAPERCLIP_DRY_RUN=true` to validate payload generation without writes
+- `PAPERCLIP_SKIP_TLS_VERIFY=true` for self-signed TLS endpoints
 
 ## Idempotency
 
@@ -53,3 +55,10 @@ The script is idempotent by name/title lookup:
 - fine-tuning prompt bundles per agent
 - production secrets/provider config
 
+## VPS deployments (Hostinger)
+
+For a Hostinger VPS deployment, see:
+
+- `HOSTINGER-VPS-RUNBOOK.md`
+
+If Paperclip is running in Docker on the VPS, use the host-mapped API URL in `PAPERCLIP_BASE_URL` (for example `http://127.0.0.1:3100/api`).

@@ -9,13 +9,17 @@ set -euo pipefail
 # Optional env:
 #   PAPERCLIP_BASE_URL=http://localhost:3100/api
 #   PAPERCLIP_TOKEN=<bearer-token>
+#   PAPERCLIP_COOKIE="session_cookie_name=session_cookie_value"
 #   PAPERCLIP_ADAPTER_TYPE=codex_local
 #   PAPERCLIP_DRY_RUN=true
+#   PAPERCLIP_SKIP_TLS_VERIFY=true
 
 BASE_URL="${PAPERCLIP_BASE_URL:-http://localhost:3100/api}"
 TOKEN="${PAPERCLIP_TOKEN:-}"
+COOKIE="${PAPERCLIP_COOKIE:-}"
 ADAPTER_TYPE="${PAPERCLIP_ADAPTER_TYPE:-codex_local}"
 DRY_RUN="${PAPERCLIP_DRY_RUN:-false}"
+SKIP_TLS_VERIFY="${PAPERCLIP_SKIP_TLS_VERIFY:-false}"
 
 COMPANY_NAME="SignalForge AI"
 COMPANY_DESCRIPTION="AI SaaS company focused on meeting summary automation and early revenue traction."
@@ -33,6 +37,13 @@ require_bin jq
 AUTH_ARGS=()
 if [[ -n "$TOKEN" ]]; then
   AUTH_ARGS=(-H "Authorization: Bearer $TOKEN")
+elif [[ -n "$COOKIE" ]]; then
+  AUTH_ARGS=(-H "Cookie: $COOKIE")
+fi
+
+CURL_ARGS=(-fsS)
+if [[ "$SKIP_TLS_VERIFY" == "true" ]]; then
+  CURL_ARGS+=(-k)
 fi
 
 api_get() {
@@ -41,7 +52,7 @@ api_get() {
     echo "[]"
     return 0
   fi
-  curl -fsS "${AUTH_ARGS[@]}" "$BASE_URL$path"
+  curl "${CURL_ARGS[@]}" "${AUTH_ARGS[@]}" "$BASE_URL$path"
 }
 
 api_post() {
@@ -52,7 +63,27 @@ api_post() {
     echo "$body" | jq . >/dev/null
     return 0
   fi
-  curl -fsS "${AUTH_ARGS[@]}" -H "Content-Type: application/json" -X POST "$BASE_URL$path" -d "$body"
+  curl "${CURL_ARGS[@]}" "${AUTH_ARGS[@]}" -H "Content-Type: application/json" -X POST "$BASE_URL$path" -d "$body"
+}
+
+preflight() {
+  if [[ "$DRY_RUN" == "true" ]]; then
+    echo "Preflight skipped (dry run mode)."
+    return
+  fi
+
+  if [[ "$BASE_URL" != */api ]]; then
+    echo "Warning: PAPERCLIP_BASE_URL usually ends with /api (current: $BASE_URL)." >&2
+  fi
+
+  echo "Running API preflight against $BASE_URL/health ..."
+  local health
+  health="$(curl "${CURL_ARGS[@]}" "${AUTH_ARGS[@]}" "$BASE_URL/health" || true)"
+  if [[ -z "$health" ]]; then
+    echo "Preflight failed: could not reach $BASE_URL/health" >&2
+    exit 1
+  fi
+  echo "Preflight OK: $(echo "$health" | jq -c . 2>/dev/null || echo "$health")"
 }
 
 find_company_id() {
@@ -218,6 +249,7 @@ ensure_issue() {
 }
 
 echo "==> Bootstrapping SignalForge AI via ${BASE_URL}"
+preflight
 company_id="$(ensure_company)"
 echo "Company: $company_id"
 
